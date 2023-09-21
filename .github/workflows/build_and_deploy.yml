@@ -28,3 +28,4 @@ jobs:
         run: |
           echo Add other actions to build,
           sleep 100
+          cd /banana/asdasdsa/oi
