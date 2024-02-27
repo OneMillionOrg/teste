@@ -9,6 +9,25 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  zero:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
+
+  one:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
+        continue-on-error: true
+
+  two:
+    needs: one
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "success"
+
+  
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
