@@ -17,8 +17,16 @@ jobs:
   one:
     runs-on: ubuntu-latest
     steps:
-      - run: exit 1
-        continue-on-error: true
+      - run: |
+          mkdir teste
+          cd teste
+          echo "banana" > banana.txt
+          cat banana.txt
+        
+      - uses: actions/cache@v4
+        with:
+          path: teste
+          key: teste
 
   two:
     needs: one
