@@ -17,6 +17,17 @@ jobs:
     steps:
       - run: exit 1
         continue-on-error: true
+
+  one:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Sucesso"
+
+  two:
+    needs: one
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Sucesso"
   
   build:
     # The type of runner that the job will run on
