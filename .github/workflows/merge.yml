@@ -15,7 +15,7 @@ jobs:
     steps:
       - run: |
           echo "${{ github.ref_name }}"
-          echo "${{ fromJson(github.event) }}"
+          echo "${{ github.event }}"
           echo "${{ github.event.merge_group }}"
           echo "${{ github.ref }}"
 
@@ -27,7 +27,7 @@ jobs:
           cd teste
           echo "banana" > banana.txt
           cat banana.txt
-        
+
       - uses: actions/cache@v4
         with:
           path: teste
@@ -40,7 +40,6 @@ jobs:
     steps:
       - run: echo "success"
 
-  
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
@@ -75,5 +74,3 @@ jobs:
           echo "HEAD: ${{ env.NX_HEAD }}"
           echo Add other actions to build,
           sleep 30
-
-      
