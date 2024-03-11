@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo ${{ github.ref_name }}
-          echo ${{ fromJson(github.event) }}
-          echo ${{ github.event.merge_group }}
-          echo ${{ github.ref }}
+          echo "${{ github.ref_name }}"
+          echo "${{ fromJson(github.event) }}"
+          echo "${{ github.event.merge_group }}"
+          echo "${{ github.ref }}"
 
   one:
     runs-on: ubuntu-latest
