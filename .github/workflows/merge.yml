@@ -18,6 +18,7 @@ jobs:
           echo "${{ github.event }}"
           echo "${{ github.event.merge_group }}"
           echo "${{ github.ref }}"
+          exit 1
 
   one:
     runs-on: ubuntu-latest
@@ -38,7 +39,7 @@ jobs:
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo "success"
+      - run: exit 1
 
   # This workflow contains a single job called "build"
   build:
