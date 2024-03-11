@@ -10,9 +10,14 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   zero:
+    name: Aqui PAullo
     runs-on: ubuntu-latest
     steps:
-      - run: exit 1
+      - run: |
+          echo ${{ github.ref_name }}
+          echo ${{ fromJson(github.event) }}
+          echo ${{ github.event.merge_group }}
+          echo ${{ github.ref }}
 
   one:
     runs-on: ubuntu-latest
