@@ -63,7 +63,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: reports-${{ matrix.index }}
-          path: teste*
+          path: macro/**/arquivo-${{ matrix.index }}-*.html
           if-no-files-found: ignore
 
   check-test:
@@ -76,7 +76,7 @@ jobs:
       - name: Download reports artifacts
         uses: actions/download-artifact@v4
         with:
-          path: teste
+          path: macro
           pattern: reports-*
           merge-multiple: true
 
