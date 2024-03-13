@@ -84,7 +84,9 @@ jobs:
       - name: Download reports artifacts
         uses: actions/download-artifact@v4
         with:
-          path: macro
+          path: |
+            macro
+            .nx
           pattern: reports-*
           merge-multiple: true
 
