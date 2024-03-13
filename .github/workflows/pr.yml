@@ -59,11 +59,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - run: |
+          echo '{\n  \"run\": {\n    \"command\": \"nx run-many -t banana-test -p maca-lib melancia-lib\",\n    \"startTime\": \"2024-03-13T13:01:54.910Z\",\n    \"endTime\": \"2024-03-13T13:02:05.268Z\",\n    \"inner\": false\n  },\n  \"tasks\": [\n    {\n      \"taskId\": \"maca-lib:banana-test\",\n      \"target\": \"banana-test\",\n      \"projectName\": \"maca-lib\",\n      \"hash\": \"17752915216145404742\",\n      \"startTime\": \"2024-03-13T13:01:54.921Z\",\n      \"endTime\": \"2024-03-13T13:02:05.046Z\",\n      \"params\": \"\",\n      \"cacheStatus\": \"cache-miss\",\n      \"status\": 0\n    },\n    {\n      \"taskId\": \"melancia-lib:banana-test\",\n      \"target\": \"banana-test\",\n      \"projectName\": \"melancia-lib\",\n      \"hash\": \"1079513487851603293\",\n      \"startTime\": \"2024-03-13T13:01:54.920Z\",\n      \"endTime\": \"2024-03-13T13:02:05.265Z\",\n      \"params\": \"\",\n      \"cacheStatus\": \"cache-miss\",\n      \"status\": 1\n    }\n  ]\n}\n' >> .nx/cache/run${{matrix.index}}.json
+
+      - run: ls
+
       - name: Archive reports artifacts
         uses: actions/upload-artifact@v4
         with:
           name: reports-${{ matrix.index }}
-          path: macro/**/arquivo-${{ matrix.index }}-*.html
+          path: |
+            macro/**/arquivo-${{ matrix.index }}-*.html
+            .nx/cache/run${{ matrix.index }}.json
           if-no-files-found: ignore
 
   check-test:
