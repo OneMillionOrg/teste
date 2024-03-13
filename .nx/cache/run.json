@@ -1,0 +1,32 @@
+{
+  "run": {
+    "command": "nx run-many -t banana-test -p maca-lib melancia-lib",
+    "startTime": "2024-03-13T13:01:54.910Z",
+    "endTime": "2024-03-13T13:02:05.268Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "maca-lib:banana-test",
+      "target": "banana-test",
+      "projectName": "maca-lib",
+      "hash": "17752915216145404742",
+      "startTime": "2024-03-13T13:01:54.921Z",
+      "endTime": "2024-03-13T13:02:05.046Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    },
+    {
+      "taskId": "melancia-lib:banana-test",
+      "target": "banana-test",
+      "projectName": "melancia-lib",
+      "hash": "1079513487851603293",
+      "startTime": "2024-03-13T13:01:54.920Z",
+      "endTime": "2024-03-13T13:02:05.265Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    }
+  ]
+}
