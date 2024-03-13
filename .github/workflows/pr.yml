@@ -78,7 +78,7 @@ jobs:
     needs: teste
     steps:
       - name: List reports
-        run: ls -R .
+        run: ls -Ra .
         continue-on-error: true
 
       - name: Download reports artifacts
@@ -91,7 +91,7 @@ jobs:
           merge-multiple: true
 
       - name: List reports
-        run: ls -R .
+        run: ls -Ra .
         continue-on-error: true
 
       - name: Run a one-line script
