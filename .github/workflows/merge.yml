@@ -7,6 +7,10 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   merge_group:
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   zero:
@@ -23,8 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          sleep 30
-          exit 1
+          sleep 3
+          exit 0
           mkdir teste
           cd teste
           echo "banana" > banana.txt
@@ -40,7 +44,9 @@ jobs:
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo "success"
+      - run: |
+          sleep 20
+          exit 1
 
   # This workflow contains a single job called "build"
   build:
