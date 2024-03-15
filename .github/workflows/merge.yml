@@ -39,7 +39,7 @@ jobs:
           exit 0
           mkdir teste
           cd teste
-          echo "banana" > banana.txt
+          echo "qweqwewq" > banana.txt
           cat banana.txt
 
       - uses: actions/cache@v4
