@@ -13,6 +13,14 @@ concurrency:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  cancel-previous:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel previous runs
+        uses: ./.github/actions/cancel-in-progress-merge-queue
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+
   zero:
     name: Aqui PAullo
     runs-on: ubuntu-latest
