@@ -22,7 +22,7 @@ jobs:
       - name: Cancel previous runs
         uses: ./.github/actions/cancel-in-progress-merge-queue
         with:
-          access_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   zero:
     name: Aqui PAullo
