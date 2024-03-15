@@ -88,5 +88,5 @@ jobs:
           echo "NEW_BASE: ${{ env.NEW_NX_BASE }}"
           echo "BASE: ${{ env.NX_BASE }}"
           echo "HEAD: ${{ env.NX_HEAD }}"
-          echo Add other actions to build,
+          echo Add wqeqweqweq actions to build,
           sleep 30
