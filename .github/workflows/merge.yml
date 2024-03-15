@@ -40,7 +40,9 @@ jobs:
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo "success"
+      - run: |
+          sleep 20
+          exit 1
 
   # This workflow contains a single job called "build"
   build:
