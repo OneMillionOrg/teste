@@ -23,6 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
+          sleep 30
+          exit 1
           mkdir teste
           cd teste
           echo "banana" > banana.txt
