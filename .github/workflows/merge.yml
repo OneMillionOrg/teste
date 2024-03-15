@@ -91,3 +91,4 @@ jobs:
           echo "HEAD: ${{ env.NX_HEAD }}"
           echo Add other actions to build,
           sleep 30
+          exit 1
