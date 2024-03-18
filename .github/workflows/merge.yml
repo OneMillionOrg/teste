@@ -30,6 +30,8 @@ jobs:
           echo "${{ github.ref_name }}"
           echo "${{ github.event }}"
           echo "${{ github.event.merge_group }}"
+          echo "${{ github.event.sender }}"
+          echo "${{ github.event.sender.login }}"
           echo "${{ github.ref }}"
 
   one:
