@@ -1,0 +1,145 @@
+name: 'test-on-comment'
+
+on:
+  issue_comment:
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.event.issue.number }}-${{ contains(github.event.comment.body, '/run-tests') }}-comment
+  cancel-in-progress: true
+
+env:
+  GH_TOKEN_BANK_ADMIN: ${{ secrets.GH_TOKEN_BANK_ADMIN }}
+  FORCE_COLOR: true
+
+jobs:
+  check-tests:
+    name: Check comment
+    if: ${{ (github.event.issue.pull_request && github.event.comment.body == '/run-tests') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Comment report URL on PR
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            :gear: Your request to run tests on demand started. You can check them at https://github.com/dlpco/bank-admin/actions/runs/${{ github.run_id }}. Any previous run will be cancelled.
+            :information_source:  For support, ask for help in [#stonks_admin_platform](https://stonepgto.slack.com/archives/C04H1KVJUGG)
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          pr_number: ${{ github.event.issue.number }}
+
+  component-test:
+    needs: [check-tests]
+    name: Component tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        index: [0, 1, 2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.10.0'
+
+      - name: Restore cached node_modules
+        id: cache-node-modules
+        uses: actions/cache/restore@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            node_modules
+            .yarn
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('yarn.lock') }}
+          fail-on-cache-miss: true
+
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v3
+        with:
+          main-branch-name: 'master'
+
+      - name: NPM Yarn Install
+        run: npm install -g yarn
+
+      - name: Setup targets for this runner
+        uses: ./.github/actions/nx-affected-parallel
+        id: affected-libs
+        with:
+          target: component-test
+          index: ${{ matrix.index }}
+          runners: 3
+
+      - name: List affected projects
+        run: |
+          yarn nx show projects --affected --with-target component-test
+          echo "Running Component Tests for ${{ steps.affected-libs.outputs.affected_libs }}"
+
+  e2e-test:
+    needs: [check-tests]
+    name: E2E
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        index: [0, 1, 2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.10.0'
+
+      - name: Restore cached node_modules
+        id: cache-node-modules
+        uses: actions/cache/restore@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            node_modules
+            .yarn
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('yarn.lock') }}
+          fail-on-cache-miss: true
+
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v3
+        with:
+          main-branch-name: 'master'
+
+      - name: NPM Yarn Install
+        run: npm install -g yarn
+
+      - name: Setup targets for this runner
+        uses: ./.github/actions/nx-affected-parallel
+        id: affected-libs
+        with:
+          target: e2e-test
+          index: ${{ matrix.index }}
+          runners: 3
+
+      - name: List affected projects
+        run: |
+          yarn nx show projects --affected --with-target e2e-test
+          echo "Running E2E Tests for ${{ steps.affected-libs.outputs.affected_libs }}"
+
+  test-report:
+    runs-on: ubuntu-latest
+    name: E2E and Component Test Report
+    needs: [component-test, e2e-test]
+    if: ${{ always() && (contains(fromJSON('["failure", "success"]'), needs.e2e-test.result) && contains(fromJSON('["failure", "success"]'), needs.component-test.result))}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
