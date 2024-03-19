@@ -24,6 +24,8 @@ jobs:
 
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v4
+        with:
+          workflow-id: test-on-comment.yml
 
       - run: |
           echo "BASE: ${{ env.NX_BASE }}"
