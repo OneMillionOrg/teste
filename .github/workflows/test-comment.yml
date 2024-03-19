@@ -24,6 +24,7 @@ jobs:
           ref: refs/pull/${{ github.event.issue.number }}/merge
 
       - run: echo ${{ toJson(github.event.issue) }}
+        continue-on-error: true
 
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v4
