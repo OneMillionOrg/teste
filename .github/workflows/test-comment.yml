@@ -23,7 +23,7 @@ jobs:
           fetch-depth: 0
           ref:
 
-      - run: echo ${{ toJson(github.event.issue.pull_request) }}
+      - run: echo ${{ toJson(github.event.issue) }}
 
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v4
