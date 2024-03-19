@@ -46,8 +46,9 @@ jobs:
         uses: nrwl/nx-set-shas@v4
 
       - run: |
-          echo ${{ (steps.get-pr.outputs.result).head.ref }}
-          echo ${{ (steps.get-pr.outputs.result).head.sha }}
+          echo "ref ${{ fromJson(steps.get-pr.outputs.result).head.ref }}"
+          echo "sha ${{ fromJson(steps.get-pr.outputs.result).head.sha }}"
+          echo "oi"
           BASINHA=$(git merge-base origin/main ${{ fromJSON(steps.get-pr.outputs.result).head.ref }})
           echo $BASINHA
           HEADINHA=$(${{ fromJSON(steps.get-pr.outputs.result).head.sha }})
