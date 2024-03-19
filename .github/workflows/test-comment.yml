@@ -50,9 +50,9 @@ jobs:
           echo "sha ${{ fromJson(steps.get-pr.outputs.result).head.sha }}"
           echo "oi"
           BASINHA=$(git merge-base origin/main ${{ fromJSON(steps.get-pr.outputs.result).head.ref }})
-          echo $BASINHA
+          echo "BASINHA: $BASINHA"
           HEADINHA=$(echo ${{ fromJSON(steps.get-pr.outputs.result).head.sha }})
-          echo $HEADINHA
+          echo "HEADINHA: $HEADINHA"
 
       - run: |
           echo "BASE: ${{ env.NX_BASE }}"
