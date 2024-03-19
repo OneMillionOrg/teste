@@ -29,8 +29,7 @@ jobs:
       - run: |
           echo "${{ github.ref_name }}"
           echo "${{ github.event }}"
-          echo "${{ github.event.merge_group }}"
-          echo ${{ toJson(github.event.sender) }}
+          echo ${{ toJson(github.event.merge_group) }}
           echo "${{ github.event.sender.login }}"
           echo "${{ github.ref }}"
 
