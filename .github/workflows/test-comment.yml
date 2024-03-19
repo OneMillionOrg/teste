@@ -51,7 +51,7 @@ jobs:
           echo "oi"
           BASINHA=$(git merge-base origin/main ${{ fromJSON(steps.get-pr.outputs.result).head.ref }})
           echo $BASINHA
-          HEADINHA=$(${{ fromJSON(steps.get-pr.outputs.result).head.sha }})
+          HEADINHA=$(echo ${{ fromJSON(steps.get-pr.outputs.result).head.sha }})
           echo $HEADINHA
 
       - run: |
