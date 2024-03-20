@@ -11,6 +11,8 @@ env:
   GH_TOKEN_BANK_ADMIN: ${{ secrets.GH_TOKEN_BANK_ADMIN }}
   FORCE_COLOR: true
 
+permissions: write-all
+
 jobs:
   check-tests:
     name: Check comment
