@@ -23,6 +23,7 @@ jobs:
           script: |
             console.log(context)
             console.log(github)
+            console.log(github.reactions)
     
       - uses: actions/github-script@v7
         id: get-pr
@@ -36,7 +37,7 @@ jobs:
             }
             core.info(`Getting Comment #${request.comment_id} from ${request.owner}/${request.repo}`)
             try {
-              const result = await github.reactions.createForIssueComment(request)
+              const result = await github.rest.reactions.createForIssueComment(request)
               return result.data
             } catch (err) {
               core.setFailed(`Request failed with error ${err}`)
