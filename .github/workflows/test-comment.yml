@@ -89,6 +89,7 @@ jobs:
           echo "BASINHA: $BASINHA"
           HEADINHA=$(echo ${{ fromJSON(steps.get-pr.outputs.result).head.sha }})
           echo "HEADINHA: $HEADINHA"
+        continue-on-error: true
 
       - run: |
           echo "BASE: ${{ env.NX_BASE }}"
