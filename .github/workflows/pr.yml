@@ -18,6 +18,41 @@ jobs:
       - run: exit 1
         continue-on-error: true
 
+      - name: Cache node modules
+        id: cache-node-modules
+        uses: actions/cache/restore@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: teste
+          key: ${{ runner.os }}-build-${{ env.cache-name }}paulo
+          lookup-only: true
+
+      - name: Display results
+        run: |
+          - echo ${{ steps.cache-node-modules.outputs.cache-hit }}
+
+      - name: Display results 1
+        if: ${{ steps.cache-node-modules.outputs.cache-hit == "false" }}
+        run: |
+          - echo ${{ steps.cache-node-modules.outputs.cache-hit }}
+
+      - name: Display results 2
+        if: ${{ steps.cache-node-modules.outputs.cache-hit == "true" }}
+        run: |
+          - echo ${{ steps.cache-node-modules.outputs.cache-hit }}
+
+      - name: Display results 3
+        if: ${{ steps.cache-node-modules.outputs.cache-hit == true }}
+        run: |
+          - echo ${{ steps.cache-node-modules.outputs.cache-hit }}
+
+      - name: Display results 4
+        if: ${{ steps.cache-node-modules.outputs.cache-hit == false }}
+        run: |
+          - echo ${{ steps.cache-node-modules.outputs.cache-hit }}
+  
+
   one:
     runs-on: ubuntu-latest
     steps:
