@@ -30,27 +30,27 @@ jobs:
 
       - name: Display results
         run: |
-          - echo ${{ steps.cache-node-modules.outputs.cache-hit }}
+          echo ${{ steps.cache-node-modules.outputs.cache-hit }}
 
       - name: Display results 1
         if: steps.cache-node-modules.outputs.cache-hit == 'false'
         run: |
-          - echo ${{ steps.cache-node-modules.outputs.cache-hit }}
+          echo ${{ steps.cache-node-modules.outputs.cache-hit }}
 
       - name: Display results 2
         if: steps.cache-node-modules.outputs.cache-hit == 'true'
         run: |
-          - echo ${{ steps.cache-node-modules.outputs.cache-hit }}
+          echo ${{ steps.cache-node-modules.outputs.cache-hit }}
 
       - name: Display results 3
         if: steps.cache-node-modules.outputs.cache-hit == true
         run: |
-          - echo ${{ steps.cache-node-modules.outputs.cache-hit }}
+          echo ${{ steps.cache-node-modules.outputs.cache-hit }}
 
       - name: Display results 4
         if: steps.cache-node-modules.outputs.cache-hit == false
         run: |
-          - echo ${{ steps.cache-node-modules.outputs.cache-hit }}
+          echo ${{ steps.cache-node-modules.outputs.cache-hit }}
   
 
   one:
