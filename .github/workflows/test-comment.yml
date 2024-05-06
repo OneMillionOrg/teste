@@ -8,7 +8,7 @@ on:
         type: choice
         description: Choose the application to deploy to PROD environment
         options:
-          - sao
+          - banana
         required: true
       version:
         type: string
@@ -24,9 +24,10 @@ permissions: write-all
 jobs:
   check-tests:
     name: Check comment ${{ github.ref_name }}
-    if: ${{ (github.event.issue.pull_request && github.event.comment.body == '/run-tests') }}
     runs-on: ubuntu-latest
     steps:
+      - run: echo "${{ github.ref_name }}"
+    
       - name: Cache event
         uses: actions/cache@v4
         with:
