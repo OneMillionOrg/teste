@@ -1,4 +1,4 @@
-name: "test-on-comment ${{ github.event.inputs.name }}"
+run-name: "test-on-comment ${{ github.event.inputs.name }}"
 
 on:
   issue_comment:
