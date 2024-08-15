@@ -1,3 +1,4 @@
+name: "Build And Workflow NAME"
 run-name: "test-on-comment ${{ github.event.inputs.name }}"
 
 on:
