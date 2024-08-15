@@ -1,4 +1,4 @@
-name: "test-on-comment"
+name: "test-on-comment ${{ github.event.inputs.name }}"
 
 on:
   issue_comment:
@@ -9,6 +9,7 @@ on:
         description: Choose the application to deploy to PROD environment
         options:
           - banana
+          - maca
         required: true
       version:
         type: string
