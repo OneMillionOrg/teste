@@ -1,5 +1,5 @@
-name: "Build And Workflow NAME"
-run-name: "test-on-comment ${{ github.event.inputs.name }}"
+name: Build And Workflow Fixed Name
+run-name: Build and Deploy ${{ github.event.inputs.name }} to PROD
 
 on:
   issue_comment:
