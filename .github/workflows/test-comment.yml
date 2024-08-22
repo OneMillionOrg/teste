@@ -1,5 +1,5 @@
 name: Build And Workflow Fixed Name
-run-name: Build and Deploy ${{ github.event.inputs.name }} to PROD
+run-name: Build and Deploy ${{ github.event.inputs.name }} to PROD ${{ github.event.inputs.bananinha == 'true' && '--dry-run' || '' }}
 
 on:
   issue_comment:
