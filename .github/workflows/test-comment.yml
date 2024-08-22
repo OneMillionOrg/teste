@@ -5,6 +5,14 @@ on:
   issue_comment:
   workflow_dispatch:
     inputs:
+      bananinha:
+        type: boolean
+        description: 'Do you want to run the "Banana" in banana mode?'
+        required: true
+      macazinha:
+        type: boolean
+        description: 'Do you want to run the "Naca" in Naca mode?'
+        required: true
       name:
         type: choice
         description: Choose the application to deploy to PROD environment
@@ -29,6 +37,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "${{ github.ref_name }}"
+      - run: echo "${{ github.event.inputs.bananinha }}"
+      - run: echo "${{ github.event.inputs.macazinha }}"
     
       - name: Cache event
         uses: actions/cache@v4
