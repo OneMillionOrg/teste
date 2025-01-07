@@ -17,6 +17,9 @@ jobs:
     steps:
       - name: Announcement Pull Request
         uses: paulo9mv/announcement_pull_request@v0.3
+        with:
+          token: ${{ GITHUB_TOKEN }}
+          message: "Oi galera"
 
             
   zero:
