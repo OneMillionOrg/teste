@@ -10,7 +10,6 @@ on:
       - synchronize
 
 permissions:
-  contents: write # Permite ler e escrever conteúdo no repositório
   issues: write    # Permite adicionar e modificar comentários em issues e PRs
   pull-requests: write  # Permite adicionar comentários em pull requests
 
@@ -24,7 +23,7 @@ jobs:
         uses: paulo9mv/announcement_pull_request@v0.4.12
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          message: "Oi galera"
+          message: "Hey everyone, code review is always welcome!"
             
   zero:
     runs-on: ubuntu-latest
