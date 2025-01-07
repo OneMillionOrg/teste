@@ -1,0 +1,52 @@
+name: Build And Workflow Fixed Name
+run-name: Build and Deploy ${{ github.event.inputs.name }} to PROD ${{ github.event.inputs.bananinha == 'true' && '--dry-run' || '' }}
+
+on:
+  issue_comment:
+  workflow_dispatch:
+    inputs:
+      bananinha:
+        type: boolean
+        description: 'Do you want to run the "Banana" in banana mode?'
+        required: true
+      macazinha:
+        type: boolean
+        description: 'Do you want to run the "Naca" in Naca mode?'
+        required: true
+      name:
+        type: choice
+        description: Choose the application to deploy to PROD environment
+        options:
+          - banana
+          - maca
+        required: true
+      version:
+        type: string
+        description: Confirm the tag that will be deployed to PROD environment
+        required: true
+
+env:
+  GH_TOKEN_BANK_ADMIN: ${{ secrets.GH_TOKEN_BANK_ADMIN }}
+  FORCE_COLOR: true
+
+permissions: write-all
+
+jobs:
+  check-tests:
+    name: Check comment ${{ github.ref_name }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ github.ref_name }}"
+      - run: echo "${{ github.event.inputs.bananinha }}"
+      - run: echo "${{ github.event.inputs.macazinha }}"
+    
+      - name: Cache event
+        uses: actions/cache@v4
+        with:
+          path: teste
+          key: ${{ runner.os }}-${{ github.event.comment.id }}
+
+      - run: mkdir teste
+      - run: |
+          echo "paulo" >> teste/testefile
+          ls
