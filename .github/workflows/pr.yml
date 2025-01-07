@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Announcement Pull Request
-        uses: paulo9mv/announcement_pull_request@v0.4.11
+        uses: paulo9mv/announcement_pull_request@v0.4.12
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           message: "Oi galera"
