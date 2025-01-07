@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest # Define o ambiente do runner
     steps:
       - name: Announcement Pull Request
-        uses: paulo9mv/announcement_pull_request@v0.3.1
+        uses: paulo9mv/announcement_pull_request@v0.4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           message: "Oi galera"
